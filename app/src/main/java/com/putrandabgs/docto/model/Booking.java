@@ -1,16 +1,16 @@
-package com.putrandabgs.docto;
+package com.putrandabgs.docto.model;
 
 import com.google.gson.annotations.SerializedName;
 
 public class Booking {
-    @SerializedName("idbooking")
-    private int idBooking;
+    @SerializedName("id_booking")
+    private Integer idBooking;
 
-    @SerializedName("iduser")
-    private int idUser;
+    @SerializedName("id_user")
+    private Integer idUser;
 
-    @SerializedName("iddokter")
-    private int idDokter;
+    @SerializedName("id_dokter")
+    private Integer idDokter;
 
     @SerializedName("tanggal")
     private String tanggal;

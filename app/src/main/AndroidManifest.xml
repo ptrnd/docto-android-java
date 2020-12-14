@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Docto">
-        <activity android:name=".ConfirmActivity"></activity>
+        <activity android:name=".ConfirmActivity"/>
         <activity android:name=".ProfileActivity" />
         <activity android:name=".DetailActivity" />
         <activity android:name=".SearchActivity">
@@ -21,7 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".LoginActivity" />
     </application>
 
 </manifest>

@@ -1,11 +1,11 @@
-package com.putrandabgs.docto;
+package com.putrandabgs.docto.model;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
 public class Dokter {
-    @SerializedName("iddokter")
+    @SerializedName("id_dokter")
     private Integer idDokter;
 
     @SerializedName("nama")

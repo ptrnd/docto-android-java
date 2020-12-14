@@ -1,6 +1,6 @@
 package com.putrandabgs.docto.services;
 
-import com.putrandabgs.docto.Dokter;
+import com.putrandabgs.docto.model.Dokter;
 
 import java.util.List;
 

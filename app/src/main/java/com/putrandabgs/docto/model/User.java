@@ -1,13 +1,12 @@
-package com.putrandabgs.docto;
+package com.putrandabgs.docto.model;
 
 import com.google.gson.annotations.SerializedName;
 
 public class User {
+    @SerializedName("id_user")
+    private Integer idUser;
 
-    @SerializedName("iduser")
-    private int idUser;
-
-    @SerializedName("namaUser")
+    @SerializedName("nama_user")
     private String nama;
 
     @SerializedName("username")
@@ -34,7 +33,7 @@ public class User {
         this.telp = telp;
     }
 
-    public int getIdUser() {
+    public Integer getIdUser() {
         return idUser;
     }
 

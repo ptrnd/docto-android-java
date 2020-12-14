@@ -18,26 +18,27 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline1"
-        android:orientation="vertical">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline1">
+
         <TextView
             android:id="@+id/detailTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:text="Detail Dokter"
             android:textSize="28dp"
-            android:textStyle="bold"
-            android:text="Detail Dokter"/>
+            android:textStyle="bold" />
 
         <ImageView
-            android:layout_marginTop="25dp"
             android:id="@+id/gambarDokter"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_gravity="center"
-            android:src="@drawable/dokter_icon"/>
+            android:layout_marginTop="25dp"
+            android:src="@drawable/dokter_icon" />
 
         <TextView
             android:id="@+id/namaDokter"
@@ -46,33 +47,33 @@
             android:layout_gravity="center"
             android:text="nama"
             android:textSize="20sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/spesialis"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Spesialis"/>
+            android:text="Spesialis" />
 
         <TextView
             android:id="@+id/alamat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Alamat"/>
+            android:text="Alamat" />
 
         <TextView
             android:id="@+id/telepon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Telepon"/>
+            android:text="Telepon" />
 
         <Space
             android:id="@+id/space1"
             android:layout_width="wrap_content"
-            android:layout_height="15dp"/>
+            android:layout_height="15dp" />
 
         <TextView
             android:id="@+id/keteranganLabel"
@@ -80,31 +81,34 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
-            android:text="Keterangan: "/>
+            android:text="Keterangan: " />
+
         <TextView
             android:id="@+id/keteranganIsi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
             android:layout_marginVertical="10dp"
-            android:text="Lorem ipmsum dolor sit amet"/>
+            android:text="Lorem ipmsum dolor sit amet" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:orientation="horizontal"
-            android:gravity="bottom">
+            android:gravity="bottom"
+            android:orientation="horizontal">
+
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="30dp"
-                android:text="Kembali"/>
+                android:text="Kembali" />
+
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="30dp"
-                android:text="Jadwalkan"/>
+                android:text="Jadwalkan" />
         </LinearLayout>
     </LinearLayout>
 
