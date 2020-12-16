@@ -81,6 +81,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
+            android:orientation="vertical"
             android:text="Keterangan: " />
 
         <TextView
@@ -99,16 +100,31 @@
             android:orientation="horizontal">
 
             <Button
+                android:id="@+id/backBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="30dp"
+                android:layout_marginHorizontal="15dp"
                 android:text="Kembali" />
 
             <Button
+                android:id="@+id/bookingBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="30dp"
+                android:layout_marginHorizontal="15dp"
                 android:text="Jadwalkan" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/detailIdDokter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="id"
+                android:visibility="invisible"/>
         </LinearLayout>
     </LinearLayout>
 

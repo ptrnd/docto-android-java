@@ -6,18 +6,18 @@ import java.util.List;
 
 public class Dokter {
     @SerializedName("id_dokter")
-    private Integer idDokter;
+    private String idDokter;
 
-    @SerializedName("nama")
+    @SerializedName("nama_dokter")
     private String namaDokter;
 
-    @SerializedName("spesialis")
-    private String spesialis;
+    @SerializedName("spesialisasi")
+    private String spesialisasi;
 
     @SerializedName("alamat")
     private String alamat;
 
-    @SerializedName("telpon")
+    @SerializedName("telp")
     private String telp;
 
     @SerializedName("keterangan")
@@ -26,20 +26,20 @@ public class Dokter {
     public Dokter() {
     }
 
-    public Dokter(Integer idDokter, String namaDokter, String spesialis, String alamat, String telp, String keterangan) {
+    public Dokter(String idDokter, String namaDokter, String spesialisasi, String alamat, String telp, String keterangan) {
         this.idDokter = idDokter;
         this.namaDokter = namaDokter;
-        this.spesialis = spesialis;
+        this.spesialisasi = spesialisasi;
         this.alamat = alamat;
         this.telp = telp;
         this.keterangan = keterangan;
     }
 
-    public Integer getIdDokter() {
+    public String  getIdDokter() {
         return idDokter;
     }
 
-    public void setIdDokter(Integer idDokter) {
+    public void setIdDokter(String idDokter) {
         this.idDokter = idDokter;
     }
 
@@ -51,12 +51,12 @@ public class Dokter {
         this.namaDokter = namaDokter;
     }
 
-    public String getSpesialis() {
-        return spesialis;
+    public String getSpesialisasi() {
+        return spesialisasi;
     }
 
-    public void setSpesialis(String spesialis) {
-        this.spesialis = spesialis;
+    public void setSpesialisasi(String spesialisasi) {
+        this.spesialisasi = spesialisasi;
     }
 
     public String getAlamat() {

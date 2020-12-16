@@ -41,6 +41,7 @@
                 android:layout_height="30dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
+                android:paddingHorizontal="5dp"
                 android:hint=""/>
 
             <TextView
@@ -58,9 +59,11 @@
                 android:layout_height="30dp"
                 android:layout_marginTop="5dp"
                 android:layout_gravity="center"
-                android:hint=""/>
+                android:paddingHorizontal="5dp"
+                android:inputType="textPassword"/>
 
             <Button
+                android:id="@+id/loginBtn"
                 android:layout_marginTop="100dp"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"

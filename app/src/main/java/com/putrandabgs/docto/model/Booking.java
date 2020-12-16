@@ -18,34 +18,40 @@ public class Booking {
     public Booking() {
     }
 
-    public Booking(int idBooking, int idUser, int idDokter, String tanggal) {
+    public Booking(Integer idBooking, Integer idUser, Integer idDokter, String tanggal) {
         this.idBooking = idBooking;
         this.idUser = idUser;
         this.idDokter = idDokter;
         this.tanggal = tanggal;
     }
 
-    public int getIdBooking() {
+    public Booking(Integer idUser, Integer idDokter, String tanggal) {
+        this.idUser = idUser;
+        this.idDokter = idDokter;
+        this.tanggal = tanggal;
+    }
+
+    public Integer getIdBooking() {
         return idBooking;
     }
 
-    public void setIdBooking(int idBooking) {
+    public void setIdBooking(Integer idBooking) {
         this.idBooking = idBooking;
     }
 
-    public int getIdUser() {
+    public Integer getIdUser() {
         return idUser;
     }
 
-    public void setIdUser(int idUser) {
+    public void setIdUser(Integer idUser) {
         this.idUser = idUser;
     }
 
-    public int getIdDokter() {
+    public Integer getIdDokter() {
         return idDokter;
     }
 
-    public void setIdDokter(int idDokter) {
+    public void setIdDokter(Integer idDokter) {
         this.idDokter = idDokter;
     }
 

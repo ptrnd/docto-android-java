@@ -31,17 +31,18 @@
                     android:text="nama"
                     android:textSize="16sp"
                     android:textStyle="bold"/>
-                <TextView
-                    android:id="@+id/spesialis"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="spesialis"/>
+                    <TextView
+                        android:id="@+id/spesialis"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="spesialis"/>
                 <TextView
                     android:id="@+id/alamat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="alamat"/>
             </LinearLayout>
+
         </LinearLayout>
         <View
             android:id="@+id/divider"
@@ -65,6 +66,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
                 android:text="Jadwalkan"/>
+
+            <TextView
+                android:id="@+id/idDokter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="id"
+                android:visibility="invisible"/>
         </LinearLayout>
     </LinearLayout>
 
