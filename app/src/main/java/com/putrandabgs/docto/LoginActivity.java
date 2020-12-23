@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,9 +27,10 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText inputUsername;
     EditText inputPassword;
-    String usernametxt;
-    String passwordtxt;
+    public String usernametxt;
+    public String passwordtxt;
     Button loginBtn;
+    Button registerBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,27 +40,39 @@ public class LoginActivity extends AppCompatActivity {
         inputUsername = (EditText) findViewById(R.id.inputUsername);
         inputPassword = (EditText) findViewById(R.id.inputPassword);
         loginBtn = (Button) findViewById(R.id.loginBtn);
-
+        registerBtn = (Button) findViewById(R.id.bt_RegisterFromLogin);
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 usernametxt = inputUsername.getText().toString();
                 passwordtxt = inputPassword.getText().toString();
-                validate(usernametxt, passwordtxt);
-                doLogin(usernametxt, passwordtxt);
+                if (validate(usernametxt, passwordtxt)){
+                    Log.d("username", usernametxt);
+                    Log.d("password", passwordtxt);
+                    doLogin(usernametxt, passwordtxt);
+                }
+            }
+        });
+
+        registerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
+                startActivity(intent);
             }
         });
     }
 
     public boolean validate(String username, String password){
-        if (username == null || username.trim().length() == 0){
-            Toast.makeText(this, "Username is required", Toast.LENGTH_SHORT);
+        if (TextUtils.isEmpty(username)){
+            Toast.makeText(LoginActivity.this, "Username Belum Terisi.", Toast.LENGTH_SHORT).show();
             return false;
-        } else if (password == null || password.trim().length() == 0){
-            Toast.makeText(this, "Password is required", Toast.LENGTH_SHORT);
+        } else if (TextUtils.isEmpty(password)){
+            Toast.makeText(LoginActivity.this, "Password Belum Terisi.", Toast.LENGTH_SHORT).show();
             return false;
+        } else {
+            return true;
         }
-        return true;
     }
 
     public void doLogin(String username, String password){
@@ -72,6 +87,7 @@ public class LoginActivity extends AppCompatActivity {
                     SharedPreferences sp = getSharedPreferences("Login", MODE_PRIVATE);
                     SharedPreferences.Editor editor = sp.edit();
                     editor.putString("ID_USER", user.get(0).getIdUser());
+                    editor.putString("NAMA_USER", user.get(0).getNama());
                     editor.putString("USERNAME", user.get(0).getUsername());
                     editor.putString("EMAIL", user.get(0).getEmail());
                     editor.apply();

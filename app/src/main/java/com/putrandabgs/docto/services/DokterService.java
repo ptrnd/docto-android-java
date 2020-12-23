@@ -16,4 +16,7 @@ public interface DokterService {
 
     @GET("dokter/{id_dokter}")
     Call<List<Dokter>> getDokterById(@Path("id_dokter") String id_dokter);
+
+    @GET("cari/{key}")
+    Call<List<Dokter>> getDokterByKey(@Path("key") String key);
 }

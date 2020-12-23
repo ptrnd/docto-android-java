@@ -10,6 +10,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -30,8 +32,10 @@ public class ProfileActivity extends AppCompatActivity {
     private Call<List<History>> listHistory;
     private BottomNavigationView bottomNavigation;
 
-    TextView namaUser;
+    TextView nama;
     TextView emailUser;
+    TextView userName;
+    Button logoutBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,16 +60,20 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        namaUser = findViewById(R.id.namaUserProfil);
+        nama = findViewById(R.id.namaUserProfil);
+        userName = findViewById(R.id.userNameProfil);
         emailUser = findViewById(R.id.emailUserProfil);
+        logoutBtn = findViewById(R.id.logoutBtn);
 
         SharedPreferences sp1 = this.getSharedPreferences("Login", MODE_PRIVATE);
 
         String idUserSP = sp1.getString("ID_USER", null);
-        String namaUserSP = sp1.getString("USERNAME", null);
+        String namaSP = sp1.getString("NAMA_USER", null);
+        String usernameSP = sp1.getString("USERNAME", null);
         String emailUserSP = sp1.getString("EMAIL", null);
 
-        namaUser.setText(namaUserSP);
+        nama.setText(namaSP);
+        userName.setText(usernameSP);
         emailUser.setText(emailUserSP);
 
         UserService userService = ApiClient.getClient().create(UserService.class);
@@ -80,6 +88,21 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<History>> call, Throwable t) {
                 Log.e("Error", t.getMessage());
+            }
+        });
+
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences sp = getSharedPreferences("Login", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sp.edit();
+                editor.remove("ID_USER");
+                editor.remove("USERNAME");
+                editor.remove("EMAIL");
+                editor.apply();
+
+                Intent intent = new Intent(getBaseContext(), LoginActivity.class);
+                startActivity(intent);
             }
         });
     }

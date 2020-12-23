@@ -24,6 +24,7 @@
             <ImageView
                 android:layout_width="95dp"
                 android:layout_height="95dp"
+                android:layout_gravity="center_vertical"
                 android:src="@drawable/ic_user" />
 
             <LinearLayout
@@ -42,10 +43,22 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/userNameProfil"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Username" />
+
+                <TextView
                     android:id="@+id/emailUserProfil"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Email" />
+
+                <Button
+                    android:id="@+id/logoutBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Logout" />
             </LinearLayout>
         </LinearLayout>
 
