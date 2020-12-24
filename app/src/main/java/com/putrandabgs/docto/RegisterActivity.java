@@ -64,6 +64,16 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
+
+        btLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     public boolean validate(String namaLengkap, String email, String username, String password, String confirmPass, String alamat, String telp){
@@ -132,7 +142,9 @@ public class RegisterActivity extends AppCompatActivity {
                 editor.apply();
 
                 Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
+                finish();
             }
 
             @Override

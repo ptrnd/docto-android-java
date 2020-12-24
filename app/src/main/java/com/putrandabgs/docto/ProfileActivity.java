@@ -36,6 +36,7 @@ public class ProfileActivity extends AppCompatActivity {
     TextView emailUser;
     TextView userName;
     Button logoutBtn;
+    Button detailBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +50,15 @@ public class ProfileActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.navigation_listDokter:
                         Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
+                        finish();
                         return true;
                     case R.id.navigation_profile:
                         Intent intent2 = new Intent(getApplicationContext(), ProfileActivity.class);
+                        intent2.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent2);
+                        finish();
                         return true;
                 }
                 return false;
@@ -64,6 +69,7 @@ public class ProfileActivity extends AppCompatActivity {
         userName = findViewById(R.id.userNameProfil);
         emailUser = findViewById(R.id.emailUserProfil);
         logoutBtn = findViewById(R.id.logoutBtn);
+        detailBtn = findViewById(R.id.detailUserBtn);
 
         SharedPreferences sp1 = this.getSharedPreferences("Login", MODE_PRIVATE);
 
@@ -88,6 +94,14 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<History>> call, Throwable t) {
                 Log.e("Error", t.getMessage());
+            }
+        });
+
+        detailBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), DetailUserActivity.class);
+                startActivity(intent);
             }
         });
 

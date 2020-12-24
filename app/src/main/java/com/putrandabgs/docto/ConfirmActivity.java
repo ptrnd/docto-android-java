@@ -6,6 +6,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -86,9 +87,7 @@ public class ConfirmActivity extends AppCompatActivity {
 
         //mengambil data dokter
         DokterService dokterService = ApiClient.getClient().create(DokterService.class);
-
         listDokter = dokterService.getDokterById(id_dokter);
-
         listDokter.enqueue(new Callback<List<Dokter>>() {
             @Override
             public void onResponse(Call<List<Dokter>> call, Response<List<Dokter>> response) {
@@ -105,38 +104,40 @@ public class ConfirmActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), SearchActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
+                finish();
             }
         });
 
         confirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Integer getiduser = Integer.parseInt(idUserSP);
-                Integer getiddokter = Integer.parseInt(tvIdDokter.getText().toString());
-
-                //awalnya dd-MM-yyyy (Hari-Bulan-Tahun)
-                String getTanggal = tanggalBooking.getText().toString();
-                String getTanggalFlipped = null;
-
-                //dijadikan yyyy-MM-dd (Tahun-Bulan-Hari) mengikuti format api
-                Date date1 = null;
-                try {
-                    date1 = new SimpleDateFormat("dd-MM-yyyy").parse(getTanggal);
-                    System.out.println(date1);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-
-                String pattern = "yyyy-MM-dd";
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-                getTanggalFlipped = simpleDateFormat.format(date1);
-                System.out.println("Flipped Date = " + getTanggalFlipped);
-
                 if (validasi()){
+                    Integer getiduser = Integer.parseInt(idUserSP);
+                    Integer getiddokter = Integer.parseInt(tvIdDokter.getText().toString());
+
+                    //awalnya dd-MM-yyyy (Hari-Bulan-Tahun)
+                    String getTanggal = tanggalBooking.getText().toString();
+                    String getTanggalFlipped = null;
+
+                    //dijadikan yyyy-MM-dd (Tahun-Bulan-Hari) mengikuti format api
+                    Date date1 = null;
+                    try {
+                        date1 = new SimpleDateFormat("dd-MM-yyyy").parse(getTanggal);
+                        System.out.println(date1);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                    String pattern = "yyyy-MM-dd";
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+                    getTanggalFlipped = simpleDateFormat.format(date1);
+                    System.out.println("Flipped Date = " + getTanggalFlipped);
+
                     kirimData(getiduser, getiddokter, getTanggalFlipped);
                 } else {
-                    Toast.makeText(ConfirmActivity.this, "tentukan tanggalnya terlebih dahulu.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ConfirmActivity.this, "Tentukan tanggalnya terlebih dahulu.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -152,10 +153,13 @@ public class ConfirmActivity extends AppCompatActivity {
 
     public boolean validasi(){
         String getTanggal = tanggalBooking.getText().toString();
-        if (getTanggal.equals("") || getTanggal.equals("Belum Ditentukan")){
+        if (TextUtils.equals(getTanggal, "Belum Ditentukan")) {
             return false;
+        } else if (TextUtils.isEmpty(getTanggal)) {
+            return false;
+        } else {
+            return true;
         }
-        return true;
     }
 
     public void kirimData(Integer idUser, Integer idDokter, String tanggal){
@@ -170,11 +174,12 @@ public class ConfirmActivity extends AppCompatActivity {
                     Toast.makeText(ConfirmActivity.this, "Booking tersimpan", Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
+                    finish();
                 } else {
                     Log.e("Error", response.message());
                     Log.e("Error", String.valueOf(response.body()));
-
                 }
             }
 

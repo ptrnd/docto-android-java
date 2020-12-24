@@ -82,4 +82,10 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.DokterView
             jadwalDokter = itemView.findViewById(R.id.jadwalDokter);
         }
     }
+
+    public void clear() {
+        int size = listDokter.size();
+        listDokter.clear();
+        notifyItemRangeRemoved(0, size);
+    }
 }
