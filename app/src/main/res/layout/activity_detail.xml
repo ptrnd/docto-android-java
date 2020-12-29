@@ -45,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="nama"
+            android:text=""
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -54,21 +54,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Spesialis" />
+            android:text="" />
 
         <TextView
             android:id="@+id/alamat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Alamat" />
+            android:text="" />
 
         <TextView
             android:id="@+id/telepon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Telepon" />
+            android:text="" />
 
         <Space
             android:id="@+id/space1"
@@ -90,7 +90,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
             android:layout_marginVertical="10dp"
-            android:text="Lorem ipmsum dolor sit amet" />
+            android:text="" />
 
         <LinearLayout
             android:layout_width="wrap_content"

@@ -3,6 +3,7 @@ package com.putrandabgs.docto;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.putrandabgs.docto.model.Booking;
@@ -39,6 +41,7 @@ public class ConfirmActivity extends AppCompatActivity {
 
     private Call<List<Dokter>> listDokter;
     private DatePickerDialog datePickerDialog;
+    private TimePickerDialog timePickerDialog;
     private SimpleDateFormat dateFormatter;
 
     TextView tvIdDokter;
@@ -47,7 +50,9 @@ public class ConfirmActivity extends AppCompatActivity {
     TextView alamat;
     TextView telepon;
     TextView tanggalBooking;
+    TextView waktuBooking;
     Button datePickerBtn;
+    Button timePickerBtn;
     Button kembaliBtn;
     Button confirmBtn;
 
@@ -64,9 +69,11 @@ public class ConfirmActivity extends AppCompatActivity {
         alamat = findViewById(R.id.alamatConfirm);
         telepon = findViewById(R.id.teleponConfirm);
         tanggalBooking = findViewById(R.id.inputTanggal);
+        waktuBooking = findViewById(R.id.inputWaktu);
         confirmBtn = findViewById(R.id.confirmBtn);
         kembaliBtn = findViewById(R.id.kembaliBtn);
         datePickerBtn = findViewById(R.id.datePickerBtn);
+        timePickerBtn = findViewById(R.id.timePickerBtn);
 
         //mengambil data id user dari hasil login (sharedpreferences)
         SharedPreferences sp1 = this.getSharedPreferences("Login", MODE_PRIVATE);
@@ -77,11 +84,18 @@ public class ConfirmActivity extends AppCompatActivity {
         id_dokter = intent.getStringExtra("id_dokter");
 
         //menentukan tanggal
-        dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
         datePickerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDateDialog();
+            }
+        });
+
+        //menentukan waktu
+        timePickerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showTimeDialog();
             }
         });
 
@@ -113,15 +127,18 @@ public class ConfirmActivity extends AppCompatActivity {
         confirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (validasi()){
+                String getTanggal = tanggalBooking.getText().toString();
+                String getWaktu = waktuBooking.getText().toString();
+
+                if (TextUtils.equals(getTanggal, "Belum Ditentukan") || TextUtils.isEmpty(getTanggal)){
+                    Toast.makeText(ConfirmActivity.this, "Tentukan tanggalnya terlebih dahulu.", Toast.LENGTH_SHORT).show();
+                } else if (TextUtils.equals(getWaktu, "Belum Ditentukan") || TextUtils.isEmpty(getWaktu)) {
+                    Toast.makeText(ConfirmActivity.this, "Tentukan waktunya terlebih dahulu.", Toast.LENGTH_SHORT).show();
+                } else {
                     Integer getiduser = Integer.parseInt(idUserSP);
                     Integer getiddokter = Integer.parseInt(tvIdDokter.getText().toString());
 
-                    //awalnya dd-MM-yyyy (Hari-Bulan-Tahun)
-                    String getTanggal = tanggalBooking.getText().toString();
-                    String getTanggalFlipped = null;
-
-                    //dijadikan yyyy-MM-dd (Tahun-Bulan-Hari) mengikuti format api
+                    //format tanggal yang diinputkan sebelumnya dijadikan [yyyy-MM-dd] (Tahun-Bulan-Hari) mengikuti format api dan database
                     Date date1 = null;
                     try {
                         date1 = new SimpleDateFormat("dd-MM-yyyy").parse(getTanggal);
@@ -129,15 +146,15 @@ public class ConfirmActivity extends AppCompatActivity {
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
-
                     String pattern = "yyyy-MM-dd";
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-                    getTanggalFlipped = simpleDateFormat.format(date1);
-                    System.out.println("Flipped Date = " + getTanggalFlipped);
+                    String getTanggalFlipped = simpleDateFormat.format(date1);
 
-                    kirimData(getiduser, getiddokter, getTanggalFlipped);
-                } else {
-                    Toast.makeText(ConfirmActivity.this, "Tentukan tanggalnya terlebih dahulu.", Toast.LENGTH_SHORT).show();
+                    //menyisipkan waktu di dalam inputan tanggal
+                    String waktu = waktuBooking.getText().toString();
+                    String getTanggalLengkap = getTanggalFlipped + " " + waktu +":00";
+
+                    kirimData(getiduser, getiddokter, getTanggalLengkap);
                 }
             }
         });
@@ -151,20 +168,8 @@ public class ConfirmActivity extends AppCompatActivity {
         telepon.setText(dokter.get(0).getTelp());
     }
 
-    public boolean validasi(){
-        String getTanggal = tanggalBooking.getText().toString();
-        if (TextUtils.equals(getTanggal, "Belum Ditentukan")) {
-            return false;
-        } else if (TextUtils.isEmpty(getTanggal)) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
     public void kirimData(Integer idUser, Integer idDokter, String tanggal){
         BookingService bookingService = ApiClient.getClient().create(BookingService.class);
-//        Call<Booking> bookingList = bookingService.tambahBooking(new Booking(idUser, idDokter, tanggal));
         Call<Booking> bookingList = bookingService.tambahBooking(idUser, idDokter, tanggal);
 
         bookingList.enqueue(new Callback<Booking>() {
@@ -197,9 +202,23 @@ public class ConfirmActivity extends AppCompatActivity {
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 Calendar newDate = Calendar.getInstance();
                 newDate.set(year, month, dayOfMonth);
+                dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
                 tanggalBooking.setText(dateFormatter.format(newDate.getTime()));
             }
         }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
         datePickerDialog.show();
+    }
+
+    public void showTimeDialog(){
+        Calendar newCalendar = Calendar.getInstance();
+        timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int selectedHour, int selectedMinute) {
+                String jam = String.format("%02d", selectedHour);
+                String menit = String.format("%02d", selectedMinute);
+                waktuBooking.setText(String.format("%s:%s", jam, menit));
+            }
+        }, newCalendar.get(Calendar.HOUR_OF_DAY), newCalendar.get(Calendar.MINUTE), true);
+        timePickerDialog.show();
     }
 }

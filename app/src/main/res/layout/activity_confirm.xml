@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.15" />
+        app:layout_constraintGuide_percent="0.11" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -32,7 +32,7 @@
             android:layout_marginBottom="10dp"/>
         <Space
             android:layout_width="match_parent"
-            android:layout_height="50dp"/>
+            android:layout_height="20dp"/>
         <ImageView
             android:id="@+id/gambarDokter"
             android:layout_width="150dp"
@@ -45,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="nama"
+            android:text=""
             android:textSize="20sp"
             android:textStyle="bold"/>
 
@@ -54,21 +54,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Spesialis"/>
+            android:text=""/>
 
         <TextView
             android:id="@+id/alamatConfirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Alamat"/>
+            android:text=""/>
 
         <TextView
             android:id="@+id/teleponConfirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Telepon"/>
+            android:text=""/>
 
         <Button
             android:id="@+id/datePickerBtn"
@@ -95,6 +95,33 @@
                 android:inputType="date"
                 android:text="Belum Ditentukan"/>
         </LinearLayout>
+
+        <Button
+            android:id="@+id/timePickerBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_gravity="center_horizontal"
+            android:text="tentukan waktu"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+            <TextView
+                android:id="@+id/waktuLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Waktu Booking: "/>
+
+            <TextView
+                android:id="@+id/inputWaktu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="time"
+                android:text="Belum Ditentukan"/>
+        </LinearLayout>
+
         <Space
             android:layout_width="match_parent"
             android:layout_height="25dp"/>
